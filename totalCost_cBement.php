@@ -19,14 +19,7 @@ function sanitizeString($field) {
 function sanitizeFloat($field){
     return filter_input(INPUT_POST, $field, FILTER_SANITIZE_NUMBER_FLOAT);
 }
-function monthlyRate ($totalCost){
-    //monthly rate based on 12 month period
-    $monthlyRate = 0;
 
-    $monthlyRate = $totalCost / 12;
-
-    return number_format($monthlyRate, 2);
-}
 
 $submitPressed = sanitizeString('submit');
 if(isset($submitPressed)) {
@@ -42,6 +35,8 @@ if(isset($submitPressed)) {
 
         $totalCost = $quantityWidgets * $costPerWidget;
 
+        $monthlyRate = $totalCost / 12;
+
         if ($totalCost <= 0) {
             echo "Please make sure that you have entered a quantity and then resubmit";
         }
@@ -52,8 +47,10 @@ if(isset($submitPressed)) {
             $totalCost = $totalCost * $taxRate;
         }
 
+        $monthlyRate = number_format($monthlyRate, 2);
+
         echo "You requested $quantityWidgets widget(s) at $20 each. Your total with tax, minus your $discountRate
- discount, comes to $totalCost. You may purchase the widget(s) in 12 monthly installments of $ monthlyRate";
+ discount, comes to $$totalCost. You may purchase the widget(s) in 12 monthly installments of $$monthlyRate";
 
     }
     totalCost(20,1.06, .75);
