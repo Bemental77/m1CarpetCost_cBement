@@ -32,8 +32,11 @@ if(isset($submitPressed)) {
         $taxRate = 1.06;
         $discountRate = .75;
         $totalCost = 0;
+        $totalDiscount = 0;
+        $monthlyRate = 0;
 
         $totalCost = $quantityWidgets * $costPerWidget;
+        $totalDiscount = $totalCost * $discountRate;
 
         $monthlyRate = $totalCost / 12;
 
@@ -43,14 +46,19 @@ if(isset($submitPressed)) {
 
         if ($totalCost >= 50) {
             $totalCost = ($totalCost * $discountRate) * $taxRate;
+            echo "You requested $quantityWidgets widget(s) at $20 each. Your total with tax, minus your $$totalDiscount
+ discount, comes to $$totalCost. You may purchase the widget(s) in 12 monthly installments of $$monthlyRate";
         } else {
             $totalCost = $totalCost * $taxRate;
+            echo "You requested $quantityWidgets widget(s) at $20 each. Your total with tax, comes to $$totalCost. You may purchase the widget(s) in 12 monthly installments of $$monthlyRate";
         }
 
+        $monthlyRate = round($monthlyRate, 2);
         $monthlyRate = number_format($monthlyRate, 2);
+        $totalDiscount = number_format($totalDiscount, 2);
+        $totalCost = number_format($totalCost, 2);
 
-        echo "You requested $quantityWidgets widget(s) at $20 each. Your total with tax, minus your $discountRate
- discount, comes to $$totalCost. You may purchase the widget(s) in 12 monthly installments of $$monthlyRate";
+
 
     }
     totalCost(20,1.06, .75);
