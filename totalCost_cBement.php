@@ -9,7 +9,8 @@
 
 </head>
 
-<body>
+<body style="color:<?php $_POST = sanitizeString('fgColor')?>; background-color:<?php $_POST = sanitizeString('bgColor')?>; font-style:<?php $_POST = sanitizeString('fontChoice') ?>;">
+
 <?php
 
 function sanitizeString($field) {
@@ -21,10 +22,10 @@ function sanitizeFloat($field){
 }
 
 
-$submitPressed = sanitizeString('submit');
+
 if(isset($submitPressed)) {
 
-    function totalCost($costPerWidget, $taxRate, $discountRate)
+    function totalCost($costPerWidget)
     {
         //set variables
         $quantityWidgets = sanitizeFloat('quantity');
@@ -34,17 +35,6 @@ if(isset($submitPressed)) {
         $totalCost = 0;
         $totalDiscount = 0;
         $monthlyRate = 0;
-
-
-        //set up associatve array containing the font types as its keys
-        $fontChoice = array("Trebuchet MS", "Jokerman", "Papyrus", "Comic Sans MS", "Tekton Pro", "Arial", "Courier New", "Verdana");
-
-        //array for fgColor
-        $fgColor = array("#ffb300", "rgb(176, 23, 31)", "rgb(75, 0, 130)", "rgb(72, 61, 139)", "rgb(132, 112, 255)", "rgb(69, 139, 0)", "rgb(162, 205, 90)");
-
-        //array for bgColor
-        $bgColor = array("rgb(75, 0, 130)", "rgb(176, 23, 31)", "rgb(72, 61, 139)", "rgb(132, 112, 255)", "rgb(69, 139, 0)", "rgb(162, 205, 90)", "#ffb300");
-
 
         $totalCost = $quantityWidgets * $costPerWidget;
         $totalDiscount = $totalCost * $discountRate;
@@ -63,7 +53,7 @@ if(isset($submitPressed)) {
         if ($totalCost >= 50) {
             $totalCost = ($totalCost * $discountRate) * $taxRate;
 
-            echo '<span style="font-size: 50px;">', '<body style="background-color:"$bgColor">', "You requested $quantityWidgets widget(s) at $20 each. Your total with tax, minus your $$totalDiscount
+            echo "You requested $quantityWidgets widget(s) at $20 each. Your total with tax, minus your $$totalDiscount
  discount, comes to $$totalCost. You may purchase the widget(s) in 12 monthly installments of $$monthlyRate";
         } else {
             $totalCost = $totalCost * $taxRate;
@@ -72,7 +62,7 @@ if(isset($submitPressed)) {
 
 
     }
-    totalCost(20,1.06, .75);
+    totalCost(20);
 }
 
 
@@ -82,9 +72,6 @@ function formatCost ($totalCost){
 
 
 ?>
-
-
-
 
 </body>
 </html>
