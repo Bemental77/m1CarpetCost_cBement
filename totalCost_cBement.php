@@ -9,7 +9,7 @@
 
 </head>
 
-<body style="color:<?php $_POST = sanitizeString('fgColor')?>; background-color:<?php $_POST = sanitizeString('bgColor')?>; font-style:<?php $_POST = sanitizeString('fontChoice') ?>;">
+<body style="color:<?= $_POST = sanitizeString('fgColor')?>;background-color:<?= $_POST = sanitizeString('bgColor')?>;font-family:<?= $_POST = sanitizeString('fontChoice')?>;">
 
 <?php
 
@@ -22,7 +22,7 @@ function sanitizeFloat($field){
 }
 
 
-
+$submitPressed = sanitizeString('submit');
 if(isset($submitPressed)) {
 
     function totalCost($costPerWidget)
